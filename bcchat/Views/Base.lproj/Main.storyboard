@@ -73,6 +73,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ujw-uG-Hun"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="titleLabel" destination="y7D-jv-BlJ" id="7U9-Ah-qfi"/>
                     </connections>
@@ -166,6 +167,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0vP-p4-wZg"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="emailTextfield" destination="u72-XV-6FN" id="Nfc-8N-TNr"/>
                         <outlet property="passwordTextfield" destination="hLb-P9-NkF" id="uaM-fo-m8M"/>
@@ -261,6 +263,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qvJ-hX-lE7"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="emailTextfield" destination="F21-w0-z4z" id="YUG-Hl-Rxj"/>
                         <outlet property="passwordTextfield" destination="abR-gz-opL" id="xCU-X2-hrx"/>
@@ -382,6 +385,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9RH-jX-MdW"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mx8-ID-ZX0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -413,7 +417,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oGa-uS-ojz"/>
+        <segue reference="8Ou-jT-8TW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="paperplane.fill" catalog="system" width="128" height="119"/>

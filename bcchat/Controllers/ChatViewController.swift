@@ -23,7 +23,7 @@ struct Message: MessageType {
 
 class ChatViewController: MessagesViewController {
     
-    let currentUser = Sender(senderId: "any_unique_id", displayName: "Steven")
+    let currentUser = Sender(senderId: "any_unique_id", displayName: "Jason")
     let otherUser = Sender(senderId: "other user", displayName: "John")
     var messages =  [Message]()
     
@@ -32,6 +32,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
         
         messages.append(Message(sender: currentUser,
                                 messageId: "1", sentDate: Date().addingTimeInterval(-86400),
@@ -164,7 +165,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
     
     func processInputBar(_ inputBar: InputBarAccessoryView) {
-        print("processInputBar")
         // Here we can parse for which substrings were autocompleted
         let attributedText = inputBar.inputTextView.attributedText!
         let range = NSRange(location: 0, length: attributedText.length)
@@ -203,10 +203,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         if let str = component as? String {
             let message = Message(sender: user, messageId: UUID().uuidString, sentDate: Date(), kind: .text(str))
           insertMessage(message)
-        } else if let img = component as? UIImage {
+        }
+//        else if let img = component as? UIImage {
 //          let message = MockMessage(image: img, user: user, messageId: UUID().uuidString, date: Date())
 //          insertMessage(message)
-        }
+//        }
       }
     }
     
