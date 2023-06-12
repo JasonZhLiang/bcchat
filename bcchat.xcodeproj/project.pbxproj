@@ -13,6 +13,12 @@
 		808EAE992A32BE6100DB3D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 808EAE972A32BE6100DB3D66 /* Main.storyboard */; };
 		808EAE9B2A32BE6200DB3D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 808EAE9A2A32BE6200DB3D66 /* Assets.xcassets */; };
 		808EAE9E2A32BE6200DB3D66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 808EAE9C2A32BE6200DB3D66 /* LaunchScreen.storyboard */; };
+		808EAEA62A32C1F500DB3D66 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEA52A32C1F500DB3D66 /* WelcomeViewController.swift */; };
+		808EAEA92A32CB4800DB3D66 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 808EAEA82A32CB4800DB3D66 /* MessageKit */; };
+		808EAEAC2A33433C00DB3D66 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 808EAEAB2A33433C00DB3D66 /* SwipeCellKit */; };
+		808EAEAE2A33442C00DB3D66 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */; };
+		808EAEB02A3349B800DB3D66 /* ChannelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */; };
+		808EAEB22A3364ED00DB3D66 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,10 @@
 		808EAE9A2A32BE6200DB3D66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		808EAE9D2A32BE6200DB3D66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		808EAE9F2A32BE6200DB3D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		808EAEA52A32C1F500DB3D66 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewController.swift; sourceTree = "<group>"; };
+		808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808EAEAC2A33433C00DB3D66 /* SwipeCellKit in Frameworks */,
+				808EAEA92A32CB4800DB3D66 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,11 +72,23 @@
 				808EAE932A32BE6100DB3D66 /* SceneDelegate.swift */,
 				808EAE952A32BE6100DB3D66 /* ViewController.swift */,
 				808EAE972A32BE6100DB3D66 /* Main.storyboard */,
+				808EAEB32A33650B00DB3D66 /* Controller */,
 				808EAE9A2A32BE6200DB3D66 /* Assets.xcassets */,
 				808EAE9C2A32BE6200DB3D66 /* LaunchScreen.storyboard */,
 				808EAE9F2A32BE6200DB3D66 /* Info.plist */,
 			);
 			path = bcchat;
+			sourceTree = "<group>";
+		};
+		808EAEB32A33650B00DB3D66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				808EAEA52A32C1F500DB3D66 /* WelcomeViewController.swift */,
+				808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */,
+				808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */,
+				808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +107,10 @@
 			dependencies = (
 			);
 			name = bcchat;
+			packageProductDependencies = (
+				808EAEA82A32CB4800DB3D66 /* MessageKit */,
+				808EAEAB2A33433C00DB3D66 /* SwipeCellKit */,
+			);
 			productName = bcchat;
 			productReference = 808EAE8E2A32BE6100DB3D66 /* bcchat.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +139,10 @@
 				Base,
 			);
 			mainGroup = 808EAE852A32BE6100DB3D66;
+			packageReferences = (
+				808EAEA72A32CB4800DB3D66 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				808EAEAA2A33433C00DB3D66 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
+			);
 			productRefGroup = 808EAE8F2A32BE6100DB3D66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,7 +171,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				808EAE962A32BE6100DB3D66 /* ViewController.swift in Sources */,
+				808EAEA62A32C1F500DB3D66 /* WelcomeViewController.swift in Sources */,
+				808EAEB02A3349B800DB3D66 /* ChannelTableViewController.swift in Sources */,
+				808EAEB22A3364ED00DB3D66 /* ChatViewController.swift in Sources */,
 				808EAE922A32BE6100DB3D66 /* AppDelegate.swift in Sources */,
+				808EAEAE2A33442C00DB3D66 /* LoginViewController.swift in Sources */,
 				808EAE942A32BE6100DB3D66 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,11 +326,13 @@
 				DEVELOPMENT_TEAM = RFBL3P62SY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bcchat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = bcChat;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -318,11 +356,13 @@
 				DEVELOPMENT_TEAM = RFBL3P62SY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bcchat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = bcChat;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,6 +398,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		808EAEA72A32CB4800DB3D66 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		808EAEAA2A33433C00DB3D66 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		808EAEA82A32CB4800DB3D66 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 808EAEA72A32CB4800DB3D66 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		808EAEAB2A33433C00DB3D66 /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 808EAEAA2A33433C00DB3D66 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 808EAE862A32BE6100DB3D66 /* Project object */;
 }
