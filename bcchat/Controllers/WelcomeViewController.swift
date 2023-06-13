@@ -23,6 +23,10 @@ class WelcomeViewController: UIViewController {
             }
             charIndex += 1
         }
+        if let secrectKey = Bundle.main.infoDictionary?["secretKey"] as? String {
+            print(secrectKey)
+        }
+
     }
     
 }

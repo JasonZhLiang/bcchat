@@ -384,7 +384,13 @@
                             <outlet property="delegate" destination="qmo-ZF-dNf" id="Q6n-gM-FJV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="9RH-jX-MdW"/>
+                    <navigationItem key="navigationItem" title="ChatChannels" id="9RH-jX-MdW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dVU-GJ-JFi">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="qmo-ZF-dNf" id="EQS-yJ-qID"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mx8-ID-ZX0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -412,6 +418,8 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhu-hn-NvV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Item" id="5ZC-Xx-n8b"/>
+                <barButtonItem title="Item" id="ZFz-pz-eZX"/>
             </objects>
             <point key="canvasLocation" x="2643.4782608695655" y="134.59821428571428"/>
         </scene>

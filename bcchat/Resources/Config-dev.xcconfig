@@ -1,0 +1,15 @@
+//
+//  Config-dev.xcconfig
+//  bcchat
+//
+//  Created by Jason Liang on 2023-06-12.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+serverUrl = https:/$()/api.braincloudservers.com/dispatcherV2
+secretKey = c100c4c2-92e6-4a12-8be0-4a9b5e95a66f
+appId = 13229
+appVersion = 1.0.0
+companyName = bitHeads
+appName = TestJ

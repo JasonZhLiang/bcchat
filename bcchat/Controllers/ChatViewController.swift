@@ -9,23 +9,17 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
-public struct Sender: SenderType {
-    public let senderId: String
-    public let displayName: String
-}
-
-struct Message: MessageType {
-    var sender: SenderType
-    var messageId: String
-    var sentDate: Date
-    var kind: MessageKind
-}
-
 class ChatViewController: MessagesViewController {
     
     let currentUser = Sender(senderId: "any_unique_id", displayName: "Jason")
     let otherUser = Sender(senderId: "other user", displayName: "John")
     var messages =  [Message]()
+    
+    var selectedChannel: Channel? {
+        didSet{
+            loadMessages()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +66,9 @@ class ChatViewController: MessagesViewController {
     }()
     
 }
+
+
+//MARK: - MessagesDataSource
 
 extension ChatViewController: MessagesDataSource{
     var currentSender: SenderType {

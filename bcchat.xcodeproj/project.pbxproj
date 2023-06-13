@@ -18,6 +18,11 @@
 		808EAEAE2A33442C00DB3D66 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */; };
 		808EAEB02A3349B800DB3D66 /* ChannelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */; };
 		808EAEB22A3364ED00DB3D66 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */; };
+		808EAEB82A37F02100DB3D66 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEB72A37F02100DB3D66 /* Sender.swift */; };
+		808EAEBA2A37F06100DB3D66 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEB92A37F06100DB3D66 /* Message.swift */; };
+		808EAEBC2A37F28C00DB3D66 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBB2A37F28C00DB3D66 /* Channel.swift */; };
+		808EAEBF2A381C0300DB3D66 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBE2A381C0300DB3D66 /* DataManager.swift */; };
+		808EAEC22A38C6AF00DB3D66 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,12 @@
 		808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewController.swift; sourceTree = "<group>"; };
 		808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		808EAEB72A37F02100DB3D66 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		808EAEB92A37F06100DB3D66 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		808EAEBB2A37F28C00DB3D66 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-dev.xcconfig"; sourceTree = "<group>"; };
+		808EAEBE2A381C0300DB3D66 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808EAEC22A38C6AF00DB3D66 /* StoreKit.framework in Frameworks */,
 				808EAEAC2A33433C00DB3D66 /* SwipeCellKit in Frameworks */,
 				808EAEA92A32CB4800DB3D66 /* MessageKit in Frameworks */,
 			);
@@ -52,6 +64,7 @@
 			children = (
 				808EAE902A32BE6100DB3D66 /* bcchat */,
 				808EAE8F2A32BE6100DB3D66 /* Products */,
+				808EAEC02A38C6AF00DB3D66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +105,7 @@
 				808EAE9A2A32BE6200DB3D66 /* Assets.xcassets */,
 				808EAE912A32BE6100DB3D66 /* AppDelegate.swift */,
 				808EAE932A32BE6100DB3D66 /* SceneDelegate.swift */,
+				808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -99,6 +113,10 @@
 		808EAEB52A376F1600DB3D66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				808EAEB72A37F02100DB3D66 /* Sender.swift */,
+				808EAEB92A37F06100DB3D66 /* Message.swift */,
+				808EAEBB2A37F28C00DB3D66 /* Channel.swift */,
+				808EAEBE2A381C0300DB3D66 /* DataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -110,6 +128,14 @@
 				808EAE9C2A32BE6200DB3D66 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		808EAEC02A38C6AF00DB3D66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,10 +218,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				808EAEA62A32C1F500DB3D66 /* WelcomeViewController.swift in Sources */,
+				808EAEBF2A381C0300DB3D66 /* DataManager.swift in Sources */,
+				808EAEB82A37F02100DB3D66 /* Sender.swift in Sources */,
 				808EAEB02A3349B800DB3D66 /* ChannelTableViewController.swift in Sources */,
 				808EAEB22A3364ED00DB3D66 /* ChatViewController.swift in Sources */,
 				808EAE922A32BE6100DB3D66 /* AppDelegate.swift in Sources */,
+				808EAEBA2A37F06100DB3D66 /* Message.swift in Sources */,
 				808EAEAE2A33442C00DB3D66 /* LoginViewController.swift in Sources */,
+				808EAEBC2A37F28C00DB3D66 /* Channel.swift in Sources */,
 				808EAE942A32BE6100DB3D66 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +254,7 @@
 /* Begin XCBuildConfiguration section */
 		808EAEA02A32BE6200DB3D66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -284,6 +315,7 @@
 		};
 		808EAEA12A32BE6200DB3D66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
