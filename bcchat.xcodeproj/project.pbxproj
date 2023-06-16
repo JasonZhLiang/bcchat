@@ -23,9 +23,13 @@
 		808EAEBC2A37F28C00DB3D66 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBB2A37F28C00DB3D66 /* Channel.swift */; };
 		808EAEBF2A381C0300DB3D66 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBE2A381C0300DB3D66 /* DataManager.swift */; };
 		808EAEC22A38C6AF00DB3D66 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */; };
+		DF154068AB5596212FD286D7 /* Pods_bcchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186CBD801322B274ABCE5758 /* Pods_bcchat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186CBD801322B274ABCE5758 /* Pods_bcchat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bcchat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		29AC84793CF6B557DE3BE856 /* Pods-bcchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bcchat.release.xcconfig"; path = "Target Support Files/Pods-bcchat/Pods-bcchat.release.xcconfig"; sourceTree = "<group>"; };
+		6538152A630103057FF72EFE /* Pods-bcchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bcchat.debug.xcconfig"; path = "Target Support Files/Pods-bcchat/Pods-bcchat.debug.xcconfig"; sourceTree = "<group>"; };
 		808EAE8E2A32BE6100DB3D66 /* bcchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bcchat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		808EAE912A32BE6100DB3D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		808EAE932A32BE6100DB3D66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 				808EAEC22A38C6AF00DB3D66 /* StoreKit.framework in Frameworks */,
 				808EAEAC2A33433C00DB3D66 /* SwipeCellKit in Frameworks */,
 				808EAEA92A32CB4800DB3D66 /* MessageKit in Frameworks */,
+				DF154068AB5596212FD286D7 /* Pods_bcchat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 				808EAE902A32BE6100DB3D66 /* bcchat */,
 				808EAE8F2A32BE6100DB3D66 /* Products */,
 				808EAEC02A38C6AF00DB3D66 /* Frameworks */,
+				EF0D7EFFBDC2174F839018D8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,8 +140,18 @@
 			isa = PBXGroup;
 			children = (
 				808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */,
+				186CBD801322B274ABCE5758 /* Pods_bcchat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF0D7EFFBDC2174F839018D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6538152A630103057FF72EFE /* Pods-bcchat.debug.xcconfig */,
+				29AC84793CF6B557DE3BE856 /* Pods-bcchat.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 808EAEA22A32BE6200DB3D66 /* Build configuration list for PBXNativeTarget "bcchat" */;
 			buildPhases = (
+				1632D213D8ECDD292A5E3833 /* [CP] Check Pods Manifest.lock */,
 				808EAE8A2A32BE6100DB3D66 /* Sources */,
 				808EAE8B2A32BE6100DB3D66 /* Frameworks */,
 				808EAE8C2A32BE6100DB3D66 /* Resources */,
+				014F74A865BA9446D94638FB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +229,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		014F74A865BA9446D94638FB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bcchat/Pods-bcchat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bcchat/Pods-bcchat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bcchat/Pods-bcchat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1632D213D8ECDD292A5E3833 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bcchat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		808EAE8A2A32BE6100DB3D66 /* Sources */ = {
@@ -370,6 +430,7 @@
 		};
 		808EAEA32A32BE6200DB3D66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6538152A630103057FF72EFE /* Pods-bcchat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -384,7 +445,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -400,6 +461,7 @@
 		};
 		808EAEA42A32BE6200DB3D66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29AC84793CF6B557DE3BE856 /* Pods-bcchat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -414,7 +476,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

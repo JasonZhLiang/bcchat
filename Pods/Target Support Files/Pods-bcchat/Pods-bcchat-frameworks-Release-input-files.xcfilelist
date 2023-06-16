@@ -1,0 +1,7 @@
+${PODS_ROOT}/Target Support Files/Pods-bcchat/Pods-bcchat-frameworks.sh
+${BUILT_PRODUCTS_DIR}/BrainCloud/BrainCloud.framework
+${BUILT_PRODUCTS_DIR}/BrainCloudCpp/BrainCloudCpp.framework
+${BUILT_PRODUCTS_DIR}/BrainCloudJsonCpp/json.framework
+${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework
+${BUILT_PRODUCTS_DIR}/SSKeychain/SSKeychain.framework
+${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework

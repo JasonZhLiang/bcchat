@@ -1,0 +1,47 @@
+PODS:
+  - BrainCloud (4.14.1):
+    - BrainCloudCpp (= 4.14.1)
+  - BrainCloudCpp (4.14.1):
+    - BrainCloudJsonCpp
+    - SocketRocket (~> 0.5)
+    - SSKeychain
+  - BrainCloudJsonCpp (1.0.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - SocketRocket (0.6.0)
+  - SSKeychain (1.4.1)
+
+DEPENDENCIES:
+  - BrainCloud
+  - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
+
+SPEC REPOS:
+  trunk:
+    - BrainCloud
+    - BrainCloudCpp
+    - BrainCloudJsonCpp
+    - SocketRocket
+    - SSKeychain
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :branch: swift5
+    :git: https://github.com/wowansm/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: 96d52c36a45847fff60bcff7a58fec1e4bd7390b
+    :git: https://github.com/wowansm/Chameleon.git
+
+SPEC CHECKSUMS:
+  BrainCloud: 4c9c30e38d3af536e558f36d97af8c019ff4f2e9
+  BrainCloudCpp: d4c7757ec5264b9336462bcac2c49e07224de10d
+  BrainCloudJsonCpp: 668a2cef2109fc8effbc473716d1f3d42f1fd346
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
+
+PODFILE CHECKSUM: 816f522c3a5ab13a31cc255391c2d345700c1f9f
+
+COCOAPODS: 1.12.1

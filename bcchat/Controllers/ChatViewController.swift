@@ -11,9 +11,10 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
     
-    let currentUser = Sender(senderId: "any_unique_id", displayName: "Jason")
-    let otherUser = Sender(senderId: "other user", displayName: "John")
+    var currentUser = Sender(senderId: AppDelegate._bc.storedProfileId, displayName: "currentDefault")
     var messages =  [Message]()
+    
+    var dataManager = DataManager()
     
     var selectedChannel: Channel? {
         didSet{
@@ -22,31 +23,14 @@ class ChatViewController: MessagesViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        messagesCollectionView.messagesDataSource = self
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messagesDisplayDelegate = self
-        messageInputBar.delegate = self
-        
-        messages.append(Message(sender: currentUser,
-                                messageId: "1", sentDate: Date().addingTimeInterval(-86400),
-                                kind: .text("hello")))
-        messages.append(Message(sender: otherUser,
-                                messageId: "2", sentDate: Date().addingTimeInterval(-70000),
-                                kind: .text("text vs attributedText")))
-        messages.append(Message(sender: currentUser,
-                                messageId: "3", sentDate: Date().addingTimeInterval(-64000),
-                                kind: .text("text from current user, text from current user,text from current user,text from current user,")))
-        messages.append(Message(sender: otherUser,
-                                messageId: "4", sentDate: Date().addingTimeInterval(-56400),
-                                kind: .attributedText(NSAttributedString(string: "other User what's up?  jubmle marble works other User what's up?  jubmle marble works other User what's up?  jubmle marble works"))))
-        messages.append(Message(sender: otherUser,
-                                messageId: "4", sentDate: Date().addingTimeInterval(-56400),
-                                kind: .text("other User what's up?  jubmle marble works other User what's up?  jubmle marble works other User what's up?  jubmle marble works")))
-        messages.append(Message(sender: currentUser,
-                                messageId: "5", sentDate: Date().addingTimeInterval(-26400),
-                                kind: .attributedText(NSAttributedString(string: "current User that will be a wonderful day"))))
-        loadMessages()
+        if dataManager.isAuthenticated() {
+            super.viewDidLoad()
+            messagesCollectionView.messagesDataSource = self
+            messagesCollectionView.messagesLayoutDelegate = self
+            messagesCollectionView.messagesDisplayDelegate = self
+            messageInputBar.delegate = self
+            enableRtt()
+        }
     }
     
     func loadMessages() {
@@ -56,6 +40,104 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+    //MARK: - bc rtt/chat methods
+    
+    func enableRtt(){
+        AppDelegate._bc.getBCClient()?.rttService.disableRTT();
+        AppDelegate._bc.getBCClient()?.rttService.enable(onRTTEnabled, failureCompletionBlock: onRTTFailed, cbObject: nil);
+    }
+    func onRTTEnabled(cbObject: NSObject?) {
+        AppDelegate._bc.getBCClient()?.rttService.registerChatCallback(onChatEvent, cbObject: nil)
+        connectChannel()
+    }
+    
+    func onRTTFailed(message:String?, cbObject: NSObject?) {
+        print("Rtt Enable Failure \(message!)")
+    }
+    
+    func onChatEvent(eventJsonStr:String?, cbObject: NSObject?) {
+        let data = eventJsonStr!.data(using: .utf8)
+        let sOperation = serializedJson(jsonData: data!, fieldName: "operation") as! String
+        if sOperation == "INCOMING" {
+            let fMessage = serializedJson(jsonData: data!, fieldName: "data")
+            let fFrom = fMessage!["from"] as! Dictionary<String, AnyObject>
+            let senderId = fFrom["id"] as! String
+            let senderName = fFrom["name"] as! String
+            let newSender = Sender(senderId: senderId, displayName: senderName)
+            let content = fMessage!["content"] as! Dictionary<String, AnyObject>
+            let unixTime = fMessage!["date"] as! Double
+            let date = Date(timeIntervalSince1970: unixTime/1000)
+            var newMessage = Message(sender: newSender,
+                                     messageId: fMessage!["msgId"] as! String,
+                                     sentDate: date,
+                                     kind: .text(content["text"] as! String))
+            if senderId == currentUser.senderId {
+                currentUser.displayName = senderName
+                newMessage.sender = currentUser
+            }else{
+                messages.append(newMessage)
+                loadMessages()
+            }
+        }
+    }
+    
+    func connectChannel(){
+        AppDelegate._bc.chatService.channelConnect(selectedChannel?.id, maxReturn: 200, completionBlock: onSuccess, errorCompletionBlock: onFail, cbObject: nil)
+    }
+    
+    func onSuccess(serviceName:String?, serviceOperation:String?, jsonData:String?, cbObject: NSObject?) {
+        print("\(serviceOperation!) Success \(jsonData!)")
+        
+        let data = jsonData?.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        switch serviceOperation {
+        case "CHANNEL_CONNECT":
+            let sData = serializedJson(jsonData: data!, fieldName: "data")
+            let fMessages = sData!["messages"]! as! [AnyObject]
+            for fMessage in fMessages {
+                let fFrom = fMessage["from"] as! Dictionary<String, AnyObject>
+                let senderId = fFrom["id"] as! String
+                let senderName = fFrom["name"] as! String
+                let newSender = Sender(senderId: senderId, displayName: senderName)
+                let content = fMessage["content"] as! Dictionary<String, AnyObject>
+                let unixTime = fMessage["date"] as! Double
+                let date = Date(timeIntervalSince1970: unixTime/1000)
+                var newMessage = Message(sender: newSender,
+                                         messageId: fMessage["msgId"] as! String,
+                                         sentDate: date,
+                                         kind: .text(content["text"] as! String))
+                if senderId == currentUser.senderId {
+                    currentUser.displayName = senderName
+                    newMessage.sender = currentUser
+                }
+                messages.append(newMessage)
+            }
+            loadMessages()
+        case "POST_CHAT_MESSAGE":
+            let sData = serializedJson(jsonData: data!, fieldName: "data")
+            let msgId = sData!["msgId"] as! String
+            print("POST_CHAT_MESSAGE message id:\(msgId)")
+        case .none:
+            print("with none")
+        case .some(_):
+            print("with some")
+        }
+    }
+    
+    
+    func serializedJson(jsonData: Data, fieldName: String) -> AnyObject? {
+        do {
+            let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: AnyObject]
+            let data = json[fieldName] as AnyObject;
+            return data
+        } catch let error as NSError {
+            print("Failed to load: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func onFail(serviceName:String?, serviceOperation:String?, statusCode:Int?, reasonCode:Int?, jsonError:String?, cbObject: NSObject?) {
+        print("\(serviceOperation!) Failure \(jsonError!)")
+    }
     
     // MARK: - Private properties
     
@@ -133,7 +215,6 @@ extension ChatViewController: MessagesLayoutDelegate {
     //    func backgroundColor(for message: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> UIColor {
     //        isFromCurrentSender(message: message) ? .purple : UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
     //    }
-    
     func cellTopLabelHeight(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CGFloat {
         18
     }
@@ -169,7 +250,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             
             let substring = attributedText.attributedSubstring(from: range)
             let context = substring.attribute(.autocompletedContext, at: 0, effectiveRange: nil)
-            print("Autocompleted: `", substring, "` with context: ", context ?? [])
         }
         
         let components = inputBar.inputTextView.components
@@ -193,25 +273,23 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
     
     // MARK: Private
-
+    
     private func insertMessages(_ data: [Any]) {
-      for component in data {
-        let user = currentUser
-        if let str = component as? String {
-            let message = Message(sender: user, messageId: UUID().uuidString, sentDate: Date(), kind: .text(str))
-          insertMessage(message)
+        for component in data {
+            let user = currentUser
+            if let str = component as? String {
+                let message = Message(sender: user, messageId: UUID().uuidString, sentDate: Date(), kind: .text(str))
+                AppDelegate._bc.chatService.postMessage(selectedChannel?.id, content: "{\"text\":\"\(str)\"}", recordInHistory: true, completionBlock: onSuccess, errorCompletionBlock: onFail, cbObject: nil)
+                insertMessage(message)
+            }
         }
-//        else if let img = component as? UIImage {
-//          let message = MockMessage(image: img, user: user, messageId: UUID().uuidString, date: Date())
-//          insertMessage(message)
-//        }
-      }
     }
     
     // MARK: - Helpers
     
     func insertMessage(_ message: Message) {
         messages.append(message)
+        
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
             messagesCollectionView.insertSections([messages.count - 1])

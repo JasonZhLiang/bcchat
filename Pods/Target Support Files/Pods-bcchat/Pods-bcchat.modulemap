@@ -1,0 +1,6 @@
+framework module Pods_bcchat {
+  umbrella header "Pods-bcchat-umbrella.h"
+
+  export *
+  module * { export * }
+}

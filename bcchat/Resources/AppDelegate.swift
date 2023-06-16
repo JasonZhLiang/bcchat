@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import BrainCloud
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    static var _bc: BrainCloudWrapper = BrainCloudWrapper();
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        AppDelegate._bc.getBCClient().enableLogging(true)
+        AppDelegate._bc.initialize(Bundle.main.infoDictionary?["serverUrl"] as? String,
+                                   secretKey: Bundle.main.infoDictionary?["secretKey"] as? String,
+                                   appId: Bundle.main.infoDictionary?["appId"] as? String,
+                                   appVersion: Bundle.main.infoDictionary?["appVersion"] as? String,
+                                   companyName: Bundle.main.infoDictionary?["companyName"] as? String,
+                                   appName: Bundle.main.infoDictionary?["appName"] as? String)
+        
         return true
     }
 
