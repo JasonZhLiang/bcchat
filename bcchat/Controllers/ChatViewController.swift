@@ -11,7 +11,7 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
     
-    var currentUser = Sender(senderId: AppDelegate._bc.storedProfileId, displayName: "currentDefault")
+    var currentUser = Sender(senderId: AppDelegate._bc.storedProfileId, displayName: "me")
     var messages =  [Message]()
     
     var dataManager = DataManager()
@@ -31,6 +31,15 @@ class ChatViewController: MessagesViewController {
             messageInputBar.delegate = self
             enableRtt()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogoutClicked))]
+    }
+    
+    @objc func onLogoutClicked() {
+        AppDelegate._bc.getBCClient().rttService.disableRTT()
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func loadMessages() {
@@ -204,6 +213,57 @@ extension ChatViewController: MessagesDisplayDelegate {
     func messageStyle(for message: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> MessageStyle {
         let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(tail, .curved)
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at _: IndexPath, in _: MessagesCollectionView) {
+        let avatar = getAvatarFor(sender: message.sender)
+        avatarView.set(avatar: avatar)
+    }
+    
+    //MARK: - avatar helper
+    
+    func getAvatarFor(sender: SenderType) -> Avatar {
+        let firstName = sender.displayName.components(separatedBy: " ").first
+        let lastName = sender.displayName.components(separatedBy: " ").first
+        let initials = "\(firstName?.first ?? "A")\(lastName?.last ?? "A")"
+        
+        if sender.senderId == currentUser.senderId {
+            return Avatar(image: #imageLiteral(resourceName: "MeAvatar"), initials: initials)
+        }
+//        return Avatar(image: UIImage(named: "YouAvatar"), initials: initials)
+        // or displaying initials instead
+        return Avatar(image: nil, initials: initials)
+    }
+    
+    func getImageViaURL(url: String)-> UIImage {
+        let catPictureURL = URL(string: "http://i.imgur.com/w5rkSIj.jpg")!
+        
+        var image = UIImage(named: "MeAvatar")
+        
+        let session = URLSession(configuration: .default)
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading image: \(e)")
+            } else {
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        image = UIImage(data: imageData)
+                        
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        
+        downloadPicTask.resume()
+        
+        return image!
     }
 }
 

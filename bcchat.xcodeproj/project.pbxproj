@@ -23,6 +23,8 @@
 		808EAEBC2A37F28C00DB3D66 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBB2A37F28C00DB3D66 /* Channel.swift */; };
 		808EAEBF2A381C0300DB3D66 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EAEBE2A381C0300DB3D66 /* DataManager.swift */; };
 		808EAEC22A38C6AF00DB3D66 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */; };
+		80E92EFC2A3DEA96006FF912 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E92EFB2A3DEA96006FF912 /* KeychainItem.swift */; };
+		80E92EFE2A3E072E006FF912 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E92EFD2A3E072E006FF912 /* RegisterViewController.swift */; };
 		DF154068AB5596212FD286D7 /* Pods_bcchat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186CBD801322B274ABCE5758 /* Pods_bcchat.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,9 @@
 		808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-dev.xcconfig"; sourceTree = "<group>"; };
 		808EAEBE2A381C0300DB3D66 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		808EAEC12A38C6AF00DB3D66 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		808EAEC32A3D0ABF00DB3D66 /* bcchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bcchat.entitlements; sourceTree = "<group>"; };
+		80E92EFB2A3DEA96006FF912 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		80E92EFD2A3E072E006FF912 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +90,7 @@
 		808EAE902A32BE6100DB3D66 /* bcchat */ = {
 			isa = PBXGroup;
 			children = (
+				808EAEC32A3D0ABF00DB3D66 /* bcchat.entitlements */,
 				808EAEB62A376F8600DB3D66 /* Views */,
 				808EAEB52A376F1600DB3D66 /* Models */,
 				808EAEB42A376EB100DB3D66 /* Resources */,
@@ -98,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				808EAEA52A32C1F500DB3D66 /* WelcomeViewController.swift */,
+				80E92EFD2A3E072E006FF912 /* RegisterViewController.swift */,
 				808EAEAD2A33442C00DB3D66 /* LoginViewController.swift */,
 				808EAEAF2A3349B800DB3D66 /* ChannelTableViewController.swift */,
 				808EAEB12A3364ED00DB3D66 /* ChatViewController.swift */,
@@ -112,6 +119,7 @@
 				808EAE912A32BE6100DB3D66 /* AppDelegate.swift */,
 				808EAE932A32BE6100DB3D66 /* SceneDelegate.swift */,
 				808EAEBD2A380D2800DB3D66 /* Config-dev.xcconfig */,
+				80E92EFB2A3DEA96006FF912 /* KeychainItem.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -280,8 +288,10 @@
 				808EAEA62A32C1F500DB3D66 /* WelcomeViewController.swift in Sources */,
 				808EAEBF2A381C0300DB3D66 /* DataManager.swift in Sources */,
 				808EAEB82A37F02100DB3D66 /* Sender.swift in Sources */,
+				80E92EFE2A3E072E006FF912 /* RegisterViewController.swift in Sources */,
 				808EAEB02A3349B800DB3D66 /* ChannelTableViewController.swift in Sources */,
 				808EAEB22A3364ED00DB3D66 /* ChatViewController.swift in Sources */,
+				80E92EFC2A3DEA96006FF912 /* KeychainItem.swift in Sources */,
 				808EAE922A32BE6100DB3D66 /* AppDelegate.swift in Sources */,
 				808EAEBA2A37F06100DB3D66 /* Message.swift in Sources */,
 				808EAEAE2A33442C00DB3D66 /* LoginViewController.swift in Sources */,
@@ -434,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = bcchat/bcchat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RFBL3P62SY;
@@ -453,6 +464,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braincloud.bcchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -465,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = bcchat/bcchat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RFBL3P62SY;
@@ -484,6 +499,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.braincloud.bcchat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

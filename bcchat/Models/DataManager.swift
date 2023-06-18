@@ -62,7 +62,8 @@ struct DataManager {
     }
     
     func verifyReceipt(receiptString: String){
-        AppDelegate._bc.appStoreService.verifyPurchase("itunes", receiptData: receiptString, completionBlock: onSuccess, errorCompletionBlock: onFail, cbObject: nil)
+        let receiptData = "{\"receipt\":\"\(receiptString)\"}"
+        AppDelegate._bc.appStoreService.verifyPurchase("itunes", receiptData: receiptData, completionBlock: onSuccess, errorCompletionBlock: onFail, cbObject: nil)
     }
     
     func deleteDynamicChannel(channelId: String){

@@ -19,13 +19,14 @@ class ChannelTableViewController: UITableViewController, SwipeTableViewCellDeleg
     var channels = [Channel]()
     
     override func viewDidLoad() {
+        setUserIAPbool(with: false)
         if dataManager.isAuthenticated() {
             super.viewDidLoad()
             tableView.rowHeight = 65.0
             SKPaymentQueue.default().add(self)
             loadChannels()
             if isPurchased(){
-                setUserIAPbool()
+                setUserIAPbool(with: true)
             }
             title = "⚡️bcChat-Channels"
             tableView.separatorStyle = .none
@@ -86,10 +87,8 @@ class ChannelTableViewController: UITableViewController, SwipeTableViewCellDeleg
                     $0.id < $1.id
                 }
             }
-        case .none:
-            print("with none")
-        case .some(_):
-            print("with some")
+        default:
+            print("other operation")
         }
         tableView.reloadData()
     }
@@ -178,7 +177,7 @@ class ChannelTableViewController: UITableViewController, SwipeTableViewCellDeleg
         for transaction in transactions {
             if transaction.transactionState == .purchased{
                 //user payment successful
-                setUserIAPbool()
+                setUserIAPbool(with: true)
                 if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
                    FileManager.default.fileExists(atPath: appStoreReceiptURL.path) {
                     print(appStoreReceiptURL.path)
@@ -202,22 +201,22 @@ class ChannelTableViewController: UITableViewController, SwipeTableViewCellDeleg
             }else if transaction.transactionState == .restored{
                 //restore button pressed trigger a process of checking their current user ID and against Apple's database
                 print("restore triggered and transaction restored")
-                setUserIAPbool()
+                setUserIAPbool(with: true)
                 SKPaymentQueue.default().finishTransaction(transaction)
             }
         }
     }
     
     
-    func setUserIAPbool(){
+    func setUserIAPbool(with bool: Bool){
         //flag the user who has bought this product to local user device, so the user can have full access
-        UserDefaults.standard.set(true, forKey: productID)
+        UserDefaults.standard.set(bool, forKey: productID)
         tableView.reloadData()
     }
     
     func isPurchased() -> Bool{
-//        return UserDefaults.standard.bool(forKey: productID)
-        return true
+        return UserDefaults.standard.bool(forKey: productID)
+//        return true
     }
     
     
@@ -226,6 +225,9 @@ class ChannelTableViewController: UITableViewController, SwipeTableViewCellDeleg
             var textField = UITextField()
             let alert = UIAlertController(title: "Add New private channel", message: "", preferredStyle: .alert)
             let addChannelAction = UIAlertAction(title: "Add channel", style: .default) { UIAlerAction in
+                if textField.text!.isEmpty {
+                    textField.text = UUID().uuidString
+                }
                 let channelCode = textField.text ?? UUID().uuidString
                 let newChannel = Channel(id: "\(Bundle.main.infoDictionary?["appId"] as! String):dy:\(channelCode)",
                                          type: "dy",
