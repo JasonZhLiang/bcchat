@@ -129,7 +129,6 @@ class ChatViewController: MessagesViewController {
             let sData = serializedJson(jsonData: data!, fieldName: "data")
             let msgId = sData!["msgId"] as! String
             print("POST_CHAT_MESSAGE message id:\(msgId)")
-            connectChannel()
         case .none:
             print("with none")
         case .some(_):
