@@ -31,6 +31,16 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(signInButtonPressed), for: .touchUpInside)
+        if self.traitCollection.userInterfaceStyle == .dark {
+            emailTextfield.attributedPlaceholder = NSAttributedString(
+                string: "Email",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+            passwordTextfield.attributedPlaceholder = NSAttributedString(
+                string: "Password",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+        }
     }
     
     override func viewDidLayoutSubviews() {

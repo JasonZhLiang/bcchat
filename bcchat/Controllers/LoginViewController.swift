@@ -28,6 +28,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(self.reconnectButton)
+        if self.traitCollection.userInterfaceStyle == .dark {
+            emailTextfield.attributedPlaceholder = NSAttributedString(
+                string: "Email",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+            passwordTextfield.attributedPlaceholder = NSAttributedString(
+                string: "Password",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+        }
         self.reconnectButton.addTarget(self, action: #selector(self.reconnectButtonPressed), for: .touchUpInside)
     }
     
