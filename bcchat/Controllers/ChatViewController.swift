@@ -29,6 +29,9 @@ class ChatViewController: MessagesViewController {
             messagesCollectionView.messagesLayoutDelegate = self
             messagesCollectionView.messagesDisplayDelegate = self
             messageInputBar.delegate = self
+            messagesCollectionView.messageCellDelegate = self
+            let customMenuItem = UIMenuItem(title: "Delete", action: #selector(MessageCollectionViewCell.quote(_:)))
+                    UIMenuController.shared.menuItems = [customMenuItem]
             enableRtt()
         }
     }
@@ -64,7 +67,8 @@ class ChatViewController: MessagesViewController {
         print("Rtt Enable Failure \(message!)")
     }
     
-    func onChatEvent(eventJsonStr:String?, cbObject: NSObject?) {
+    func onChatEvent(eventJsonStr: String?, cbObject: NSObject?) {
+        print("onChatEvent eventJsonStr:\(eventJsonStr!)")
         let data = eventJsonStr!.data(using: .utf8)
         let sOperation = serializedJson(jsonData: data!, fieldName: "operation") as! String
         if sOperation == "INCOMING" {
@@ -125,6 +129,7 @@ class ChatViewController: MessagesViewController {
             let sData = serializedJson(jsonData: data!, fieldName: "data")
             let msgId = sData!["msgId"] as! String
             print("POST_CHAT_MESSAGE message id:\(msgId)")
+            connectChannel()
         case .none:
             print("with none")
         case .some(_):
@@ -156,6 +161,35 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
     
+    
+    //MARK: - Delete message
+    
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+           
+        if (action == NSSelectorFromString("quote:")) && (messages[indexPath.section].sender.senderId == currentUser.senderId ) {
+               return true
+           } else {
+               return super.collectionView(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
+           }
+       }
+       
+   override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+
+           if action == NSSelectorFromString("quote:") {
+               
+               if messages[indexPath.section].sender.senderId == currentUser.senderId {
+                   // 1.) Remove from datasource
+                   AppDelegate._bc.chatService.deleteMessage(selectedChannel?.id, peerCode: messages[indexPath.section].messageId, version: -1, completionBlock: onSuccess, errorCompletionBlock: onFail, cbObject: nil)
+                   messages.remove(at: indexPath.section)
+                   // 2.) Delete sections
+                   collectionView.deleteSections([indexPath.section])
+               } else {
+                   print("Can only delete messages sent by the user itself")
+               }
+           } else {
+               super.collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
+           }
+       }
 }
 
 
@@ -372,3 +406,25 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
 }
 
+//MARK: - MessageCellDelegate
+
+extension ChatViewController: MessageCellDelegate {
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+        print(cell)
+    }
+}
+
+
+extension MessageCollectionViewCell {
+    @objc func quote(_ sender: Any?) {
+        
+        // Get the collectionView
+        if let collectionView = self.superview as? UICollectionView {
+            // Get indexPath
+            if let indexPath = collectionView.indexPath(for: self) {
+                // Trigger action
+                collectionView.delegate?.collectionView?(collectionView, performAction: #selector(MessageCollectionViewCell.quote(_:)), forItemAt: indexPath, withSender: sender)
+            }
+        }
+    }
+}
